@@ -109,7 +109,7 @@ def process_document(request):
             else:
                 return HttpResponse("Unsupported document type")
 
-            return redirect('chatbot:chat_page',document_id=document.id)
+            return redirect('chat_page',document_id=document.id)
 
     else:
         form = DocumentForm()

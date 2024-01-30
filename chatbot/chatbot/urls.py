@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from chatapp.views import process_document,chat_page
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("bot/",include('chatapp.urls'))
+    path('chat_page/<int:document_id>/', chat_page, name='chat_page'),
+    path('', process_document, name='process_document'),
+    # Add other URL patterns as needed
 ]
