@@ -128,7 +128,7 @@ from langchain_community.document_loaders import PyPDFLoader
 
 def extract_text_from_pdf(file):
     # Extract text from PDF using PyMuPDF from an in-memory file
-    directory="chatapp\documents\\"+str(file)
+    directory="chatapp/documents/"+str(file)
     file_loader=PyPDFLoader(directory)
     documents=file_loader.load()
     return documents
