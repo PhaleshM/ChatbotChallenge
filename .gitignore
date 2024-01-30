@@ -3,9 +3,9 @@ oldrequirements.txt
 requirements.txt
 new
 env
-chatbot/chatapp/migrations
+# chatbot/chatapp/migrations
 chatbot/chatapp/documents
 chatbot/chatapp/vector_db
 chatbot/chatapp/__pycache__
 chatbot/chatbot/__pycache__
-chatbot/db.sqlite3
+# chatbot/db.sqlite3
