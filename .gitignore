@@ -5,7 +5,6 @@ new
 env
 chatbot/chatapp/migrations
 chatbot/chatapp/documents
-chatbot/chatapp/templates
 chatbot/chatapp/vector_db
 chatbot/chatapp/__pycache__
 chatbot/chatbot/__pycache__

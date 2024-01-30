@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add your head content here -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        #chat-container {
+            margin: 0 20% 0 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            flex-wrap: nowrap;
+            align-items: stretch;
+        }
+
+        #user-input {
+            margin-top: 20px; 
+        }
+        #chat-history{
+            width:100%;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <div id="chat-container">
+        <h1>Title: {{document}}</h1>
+        <div id="chat-history"></div>
+        <div id="user-input">
+            <form id="chat-form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                <input type="text" class="form-control" name="user_question" id="user-question" placeholder="Ask a question...">
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Extract document ID from the URL
+            var documentId = window.location.pathname.split('/').pop();
+    
+            // Update the form action attribute with the document ID if available
+            if (documentId !== null && documentId !== '') {
+                $('#chat-form').attr('action', '/chat_page/' + documentId + '/');
+            }
+    
+            $('#chat-form').submit(function (event) {
+                event.preventDefault();
+    
+                var userQuestion = $('#user-question').val();
+                var chatHistory = $('#chat-history');
+    
+                // Update chat history with user question
+                chatHistory.append('<div>User: ' + userQuestion + '</div>');
+    
+                // Send AJAX request to get chatbot response
+                $.ajax({
+                    type: 'POST',
+                    url: $('#chat-form').attr('action'),
+                    data: {
+                        'user_question': userQuestion,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    },
+                    success: function (data) {
+                        // Update chat history with chatbot response
+                        chatHistory.append('<div>Chatbot: ' + data.chatbot_response + '</div>');
+                    },
+                    error: function () {
+                        // Handle errors if needed
+                    }
+                });
+    
+                // Clear the input field
+                $('#user-question').val('');
+            });
+        });
+    </script>
+    
+</body>
+</html>
