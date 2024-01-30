@@ -1,6 +1,8 @@
 .env
 oldrequirements.txt
+requirements.txt
 new
+env
 chatbot/chatapp/migrations
 chatbot/chatapp/documents
 chatbot/chatapp/templates

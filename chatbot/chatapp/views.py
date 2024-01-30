@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .forms import DocumentForm
 from .models import Document
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import SentenceTransformerEmbeddings
+# from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import os
 from langchain.chains import (
@@ -13,7 +13,7 @@ from langchain_core.prompts import PromptTemplate
 # from langchain_community.llms import HuggingFaceHub
 from dotenv import load_dotenv
 # import google.generativeai as genai
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI,GoogleGenerativeAIEmbeddings
 load_dotenv()
 
 # gemini_api_key = os.environ["GEMINI_API_KEY"]
@@ -21,7 +21,8 @@ google_api_key =os.environ["GEMINI_API_KEY"]
 # genai.configure(api_key = gemini_api_key)
 huggingfacehub_api_token=os.environ['huggingfacehub_api_token']
 
-embedding_model = SentenceTransformerEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+# embedding_model = SentenceTransformerEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 from django.http import JsonResponse
 
